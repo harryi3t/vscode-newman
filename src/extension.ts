@@ -6,11 +6,12 @@ import * as newman from 'newman';
 import * as handlebars from 'handlebars';
 import * as filesize from 'filesize';
 import * as prettyms from 'pretty-ms';
+import PreviewManager from './PreviewManager';
 
 let template = fs.readFileSync('/users/harryi3t/Desktop/template.hbs', 'utf-8'),
 		compiler = handlebars.compile(template),
 		util = {
-			prettyms (ms: number) {
+			prettyms (ms: any) {
 				return (ms < 1998) ? `${parseInt(ms, 10)}ms` : prettyms(ms || 0);
 			},
 			filesize (bytes: number) {
@@ -64,6 +65,8 @@ export function activate(context: vscode.ExtensionContext) {
 			});
 
 			fs.writeFileSync('/Users/harryi3t/work/playground/vscode-extension/vscode-newman/newman/report.html', content);
+
+			PreviewManager.createOrShow(content);
 
 			// Display a message box to the user
 			vscode.window.showInformationMessage('Ran collection using newman!');
