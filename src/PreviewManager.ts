@@ -16,6 +16,7 @@ export default class PreviewManager {
 
 		// If we already have a panel, show it.
 		if (PreviewManager.currentPanel) {
+			PreviewManager.currentPanel._panel.webview.html = content;
 			PreviewManager.currentPanel._panel.reveal(column);
 			return;
 		}

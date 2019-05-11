@@ -38,8 +38,34 @@ export function activate(context: vscode.ExtensionContext) {
 	});
 
 	let disposable2 = vscode.commands.registerCommand('extension.newman', () => {
+		// Check if a file is open in active tab
+		if (!vscode.window.activeTextEditor) {
+			vscode.window.showWarningMessage('No file in active tab! Please open a Postman Collection and try again.');
+			return;
+		}
+
+		// Check if the file type is json
+		let isJSON = vscode.window.activeTextEditor && vscode.window.activeTextEditor.document.languageId.toLowerCase() === 'json';
+		if (!isJSON) {
+			vscode.window.showWarningMessage('The file is not a valid Postman Collection');
+			return;
+		}
+
+		let collectionText = vscode.window.activeTextEditor.document.getText(),
+				collectionJSON;
+
+		try {
+			collectionJSON = JSON.parse(collectionText);
+		} catch (error) {
+			console.log({error});
+			vscode.window.showWarningMessage('The file is not a valid Postman Collection');
+			return;
+		}
+
+		PreviewManager.createOrShow('Running collection....');
+
 		newman.run({
-			collection: require('/users/harryi3t/Desktop/Send a test notification.postman_collection.json'),
+			collection: collectionJSON,
 			reporters: 'cli'
 		}, function (err: any, summary: any) {
 			console.log('collection run complete!', {
@@ -63,8 +89,6 @@ export function activate(context: vscode.ExtensionContext) {
 						duration: util.prettyms(summary.run.timings.completed - summary.run.timings.started)
 				}
 			});
-
-			fs.writeFileSync('/Users/harryi3t/work/playground/vscode-extension/vscode-newman/newman/report.html', content);
 
 			PreviewManager.createOrShow(content);
 
