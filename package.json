@@ -5,9 +5,9 @@
 	"publisher": "harryi3t",
 	"repository": {
 		"type": "git",
-    "url": "https://github.com/harryi3t/vscode-newman.git"
+		"url": "https://github.com/harryi3t/vscode-newman.git"
 	},
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"engines": {
 		"vscode": "^1.33.0"
 	},
