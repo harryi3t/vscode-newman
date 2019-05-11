@@ -2,7 +2,7 @@
 	"name": "vscode-newman",
 	"displayName": "VSCode Newman",
 	"description": "Run Postman collection from within vscode",
-	"version": "0.0.1",
+	"version": "0.1.0",
 	"engines": {
 		"vscode": "^1.33.0"
 	},
