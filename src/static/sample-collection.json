@@ -1,0 +1,55 @@
+{
+	"info": {
+		"_postman_id": "19c95623-2c66-4405-abd7-428acba0d868",
+		"name": "Send a test notification",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "send hello",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "dcaaf79b-2e24-45cc-9658-c7e4b174bd15",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"text\": \"hello {{$randomInt}}\"\n}"
+				},
+				"url": {
+					"raw": "https://hooks.slack.com/services/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",
+					"protocol": "https",
+					"host": [
+						"hooks",
+						"slack",
+						"com"
+					],
+					"path": [
+						"services",
+						"T02G7V5JE",
+						"B0BFSNE7L",
+						"FWTuPL6wl2VTcXInuVi84kXz"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
